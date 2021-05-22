@@ -9,21 +9,31 @@
 /*   Updated: 2021/05/22 00:41:09 by snarain          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line.h"
 #define  BUFFER_SIZE 4096
 
-int	get_next_line(int fd,char **line) // **line = on doit remplir le **line grace au fd qu'on nous envoie.
+static char     stock_gnl()
 {
-	int		i;
-	char	*ret;
-	char	buffer[BUFFER_SIZE];
+        return ();
+}
 
-//	ret = read(fd,buffer,BUFFER_SIZE);
-	while ()
-	{
+int     get_next_line(int fd, char **line) // **line = on doit remplir le **line grace au fd qu'on nous envoie.
+{
+        char            *ret;
+        char    buffer[BUFFER_SIZE];
 
-	}
-	return 0;
+        *line = malloc(sizeof(char) * BUFFER_SIZE);
+        if (!*line)
+                return (NULL);
+        while (1)
+        {
+                buffer = read(fd,buffer,BUFFER_SIZE);
+                if (buffer > BUFFER_SIZE)
+                        return (0);
+                return (1);
+        }
+        return (-1);
 }
 
 int	main(void)
