@@ -1,21 +1,18 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: snarain <snarain@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 21:23:34 by snarain           #+#    #+#             */
-/*   Updated: 2021/05/22 00:37:22 by snarain          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#include <stdlib.h>
-#include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 128
+# endif
 
-void	ft_putstr_fd(char *s, int fd)
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+
+int     get_next_line(int fd, char **line);
+size_t	ft_strlen(const char *str);
+char	*ft_gnldup(const char *s1, const char *srcfree);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_gnljoin(char const *s1, char const *s2);
 
 #endif
