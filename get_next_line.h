@@ -14,5 +14,4 @@ size_t	ft_strlen(const char *str);
 char	*ft_gnldup(const char *s1, const char *srcfree);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_gnljoin(char const *s1, char const *s2);
-
 #endif

@@ -3,52 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snarain <snarain@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vbachele <vbachele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 20:06:22 by snarain           #+#    #+#             */
-/*   Updated: 2021/05/22 00:41:09 by snarain          ###   ########.fr       */
+/*   Created: 2021/05/26 15:15:12 by vbachele          #+#    #+#             */
+/*   Updated: 2021/05/26 16:57:53 by vbachele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define  BUFFER_SIZE 4096
 
-static char     stock_gnl()
+int ft_gnlcheck(char *line, char *gnline)
 {
-        return ();
+	if (!line || !gnline)
+		return (-1);
+	return(1);
 }
 
-int     get_next_line(int fd, char **line) // **line = on doit remplir le **line grace au fd qu'on nous envoie.
+int ft_gnl_find(char *gnline)
 {
-        char            *ret;
-        char    buffer[BUFFER_SIZE];
+	int i;
 
-        *line = malloc(sizeof(char) * BUFFER_SIZE);
-        if (!*line)
-                return (NULL);
-        while (1)
-        {
-                buffer = read(fd,buffer,BUFFER_SIZE);
-                if (buffer > BUFFER_SIZE)
-                        return (0);
-                return (1);
-        }
-        return (-1);
-}
-
-int	main(void)
-{
-	char	*line;
-	int		fd;
-	int		flag;
-
-	fd = open();
-	flag = 1;
-	while (flag)
+	i = 0;
+	while (gnline && gnline[i])
 	{
-		flag = get_next_line(fd, &line);
-		printf("%s\n", line);
-		free(line);
+		if (gnline[i] == '\n')
+			return(i);
+		i++;
 	}
-	return (0);
+	return(-1);
+}
+
+int     get_next_line(int fd, char **line)
+{
+	static char 	*gnline = ""; 
+	char 			buffer[BUFFER_SIZE + 1]; 
+	int 			n; 
+	static int		flag;
+
+	n = read(fd, buffer, BUFFER_SIZE); // On lit le fichier et on stock le retour dans n
+	if (!line || fd < 0 || BUFFER_SIZE < 1 || n < 0)
+		return (-1);
+	if (flag != -1)
+	{
+		buffer[n] = '\0'; // met le caractere NULL a la fin de la chaine de caractere
+		gnline = ft_gnljoin(gnline, buffer); // Attribue la valeur du fichier restant dans gnline
+		flag = ft_gnl_find(gnline); // On trouve la taille de la ligne jusqu'au \n
+		*line = ft_substr(gnline, 0, flag); //
+		gnline = ft_gnldup(&gnline[flag +1], gnline);
+		free(gnline);
+		return (ft_gnlcheck(*line, gnline));
+	}
+	return(0);
 }

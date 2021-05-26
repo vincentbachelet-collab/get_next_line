@@ -6,7 +6,7 @@
 /*   By: vbachele <vbachele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 11:31:33 by vbachele          #+#    #+#             */
-/*   Updated: 2021/05/25 17:08:50 by vbachele         ###   ########.fr       */
+/*   Updated: 2021/05/26 17:04:24 by vbachele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_gnljoin(char const *s1, char const *s2)
 	if (!d)
 		return (0);
 	i = 0;
-	while (s1[i])
+	while (s1[i] && s1)
 	{
 		d[i] = s1[i];
 		i++;
@@ -36,8 +36,8 @@ char	*ft_gnljoin(char const *s1, char const *s2)
 		j++;
 	}
 	d[i + j] = 0;
-	//if (s1)
-		//free((char *)s1);
+	if (s1)
+		free((char *)s1);
 	return (d);
 }
 
@@ -51,7 +51,7 @@ char	*ft_gnldup(const char *s1, const char *srcfree)
 	if (!dst)
 		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (s1[i] && s1)
 	{
 		dst[i] = s1[i];
 		i++;
@@ -67,7 +67,7 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 		i++;
 	return (i);
 }
